@@ -61,7 +61,7 @@ resizeCanvas(canvas);
 const colorArray = ['#edede9', '#d6ccc2', '#f5ebe0', '#e3d5ca', '#d5bdaf'];
 speckleCanvas(canvas, context, colorArray);
 
-const brush = new Brush3(canvas, context);
+const brush = new BrushAlpha(canvas, context);
 brush.createColorArray();
 brush.createColorWheel();
 
@@ -87,8 +87,7 @@ function loop(){
 
 loop();
 
-window.$fxhashFeatures = {
+window.$fxhashFeatures = brush.fxProperties();
   // "Neon color 1": colorPalette.cs5,
   // "Neon color 2": colorPalette.cs6
 // here define the token features
-}
