@@ -9,7 +9,7 @@ const context = canvas.getContext('2d');
 function resizeCanvas(canvas){
   let length;
   window.innerWidth > window.innerHeight ? length = window.innerHeight : length = window.innerWidth;
-  length = Math.floor(length * 0.80);
+  length = Math.floor(length * 0.85);
   canvas.width = length;
   canvas.height = length;
 }
@@ -61,38 +61,34 @@ resizeCanvas(canvas);
 const colorArray = ['#edede9', '#d6ccc2', '#f5ebe0', '#e3d5ca', '#d5bdaf'];
 speckleCanvas(canvas, context, colorArray);
 
-const brush = new Brush(canvas, context);
+const brush = new Brush3(canvas, context);
 brush.createColorArray();
 brush.createColorWheel();
-// brush.animate();
 
-// setInterval(()=>{
-//   brush.animate();
-// }, 10);
-
-
+/*-------------------------*/
 
 const fps = 60;
 const interval = 1000 / fps;
 let now = Date.now();
 let then = Date.now();
 let delta = 0;
+let animate = true;
 
 function loop(){
-  animation = requestAnimationFrame(loop);
+  animate ? window.requestAnimationFrame(loop) : null //fxsnap;
   now = Date.now();
   delta = now - then;
   if(delta > interval){
       then = now - (delta % interval);
       //animation code
-      brush.animate();
+      animate = brush.animate();
     }
   }
 
 loop();
 
-// window.$fxhashFeatures = {
-//   "Neon color 1": colorPalette.cs5,
-//   "Neon color 2": colorPalette.cs6
-// // here define the token features
-// }
+window.$fxhashFeatures = {
+  // "Neon color 1": colorPalette.cs5,
+  // "Neon color 2": colorPalette.cs6
+// here define the token features
+}
