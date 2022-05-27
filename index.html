@@ -6,8 +6,8 @@
     <script id="fxhash-snippet">
       //---- do not edit the following code (you can indent as you wish)
       let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
-      // var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
-      var fxhash = 'oobcC4sfREmkSF5jkyFZX4YjtZbG1YiZn8C3k2XivwrnAdDdoFr';
+      var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+      // var fxhash = 'ooAbQUrvqrUCMiRThVKiUMuMeweK4Qtkto8ogybq1a1Cb2UxE9f';
       console.log(fxhash)
       let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
       let fxhashTrunc = fxhash.slice(2)

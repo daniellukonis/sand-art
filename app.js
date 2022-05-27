@@ -3,7 +3,8 @@
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-
+const fxRandHash = fxrand();
+console.log(fxRandHash)
 
 /*-------------------------*/
 
@@ -39,7 +40,7 @@ function fillCanvas(canvas, context, color){
 
 
 function speckle(canvas, context, color){
-  const speckleSize = Math.floor(fxrand() * 3) + 1;
+  const speckleSize = Math.floor(fxRandHash * 3) + 1;
   const x = Math.floor(canvas.width * fxrand());
   const y = Math.floor(canvas.height * fxrand());
   context.save();
@@ -74,15 +75,15 @@ class BrushAlpha{
     this.yv = 1;
 
     this.a = 0;
-    this.av0 = fxrand() > 0.5 ? 0.05 : -0.05;
-    this.av1 = fxrand() > 0.5 ? 0.1 : -0.1;
-    this.av = fxrand() > 0.5 ? this.av0 : this.av1;
+    this.av0 = fxRandHash > 0.5 ? 0.05 : -0.05;
+    this.av1 = fxRandHash > 0.5 ? 0.1 : -0.1;
+    this.av = fxRandHash > 0.5 ? this.av0 : this.av1;
 
-    this.r = Math.floor(50 * fxrand());
-    this.rv = 0.5 + fxrand();
+    this.r = Math.floor(50 * fxRandHash);
+    this.rv = 0.5 + fxRandHash;
 
-    this.colorH = Math.floor(360 * fxrand());
-    this.colorSpread = (Math.floor(6 * fxrand()) * 5) + 5;
+    this.colorH = Math.floor(360 * fxRandHash);
+    this.colorSpread = (Math.floor(6 * fxRandHash) * 5) + 5;
     this.colorS = '50%';
     this.colorL = '50%';
     this.colorArray = [];
