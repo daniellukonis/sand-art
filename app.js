@@ -35,7 +35,7 @@ function fillCanvas(canvas, context, color){
 /*-------------------------*/
 
 function speckle(canvas, context, color){
-  const speckleSize = Math.floor(fxrand() * 4) + 1;
+  const speckleSize = Math.floor(fxrand() * 3) + 1;
   const x = Math.floor(canvas.width * fxrand());
   const y = Math.floor(canvas.height * fxrand());
   context.save();
@@ -75,7 +75,7 @@ let delta = 0;
 let animate = true;
 
 function loop(){
-  animate ? window.requestAnimationFrame(loop) : null //fxsnap;
+  animate ? window.requestAnimationFrame(loop) : fxpreview();
   now = Date.now();
   delta = now - then;
   if(delta > interval){
@@ -88,6 +88,3 @@ function loop(){
 loop();
 
 window.$fxhashFeatures = brush.fxProperties();
-  // "Neon color 1": colorPalette.cs5,
-  // "Neon color 2": colorPalette.cs6
-// here define the token features
