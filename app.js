@@ -4,7 +4,7 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 const fxRandHash = fxrand();
-console.log(fxRandHash)
+
 
 /*-------------------------*/
 
@@ -71,16 +71,17 @@ class BrushAlpha{
 
     this.x = Math.floor(this.canvas.width / 2);
     this.y = Math.floor(this.canvas.height / 2);
-    this.xv = 1;
-    this.yv = 1;
+    this.xv = 0.1;
+    this.yv = 0.1;
+
+    this.w = 0;
+    this.wv = fxRandHash * 0.1 + 0.01;
 
     this.a = 0;
-    this.av0 = fxRandHash > 0.5 ? 0.05 : -0.05;
-    this.av1 = fxRandHash > 0.5 ? 0.1 : -0.1;
-    this.av = fxRandHash > 0.5 ? this.av0 : this.av1;
+    this.av = fxRandHash > 0.1 ? 0.01 : -0.01;
 
     this.r = Math.floor(50 * fxRandHash);
-    this.rv = 0.5 + fxRandHash;
+    this.rv = fxRandHash + 0.5;
 
     this.colorH = Math.floor(360 * fxRandHash);
     this.colorSpread = (Math.floor(6 * fxRandHash) * 5) + 5;
@@ -89,7 +90,10 @@ class BrushAlpha{
     this.colorArray = [];
     this.colorWheel = [];
 
+    this.sectorWidth = Math.floor(fxRandHash * 4) + 8;
+
     this.lineWidth = 10;
+
   }
 
   fxProperties(){
@@ -125,24 +129,30 @@ class BrushAlpha{
     this.colorWheel.forEach(e => {
       c.strokeStyle = e.color;
       c.beginPath();
-      c.arc(0, 0, this.r, e.arc + this.a, this.a + e.arc + Math.PI / 4);
+      c.arc(0, 0, this.r, e.arc + this.a, this.a + e.arc + Math.PI / this.sectorWidth);
       c.stroke();
     });
     c.restore();
   }
 
   move(){
-    this.r += this.rv + Math.cos(this.a);
+    this.r += 1 + Math.cos(this.w);
   }
 
-  rotate(){
-    this.a += this.av;
+  waveCos(){
+    this.w += this.wv;
+    this.a = Math.cos(this.w);
+  }
+
+  waveSin(){
+    this.w += this.wv;
+    this.a = Math.sin(this.w);
   }
 
   animate(){
     if(this.r < this.canvas.width / 2 * 0.9){
+      fxRandHash < 0.5 ? this.waveCos() : this.waveSin();
       this.move();
-      this.rotate();
       this.draw();
       return true;
     }
